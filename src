@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Rawr</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="http://www.transparentpng.com/thumb/wi-fi/wifi-logo-blue-png-photo-31.png">
+    <!-- import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+  </head>  
+  <body>
+
+    <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+    <script src="https://button.glitch.me/button.js"></script>
+    <div id="gnd">
+      
+    </div>
+    <img id="dino" src="https://lh3.googleusercontent.com/jq1i1nFKtLmxQI70ss58AfAwZi0Ef44ie62bthVndVBeHrPL04Ea46560tm-Pdki7phe" width="100">
+    <img id="cac" src="https://cdn.elg.im/t-rex/img/2x-obstacle-large.png" width="170">
+<style>
+/* CSS files add styling rules to your content */
+:root{
+  --size=0;
+  --d=0;
+  --jump=200;
+  --cacpos=0;
+  --col=silver;//make red when dead...
+}
+body {
+  font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+  margin: 2em;
+  background-color:silver;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
+
+#gnd{
+  background-color:black;
+  width:var(--size);
+  height:200px;
+  position:absolute;
+  bottom:0px;
+  left:0px;
+}
+#dino{
+  position:absolute;
+  bottom:var(--jump);
+  left:var(--d);
+}
+#cac{
+  position:absolute;
+  bottom:200px;
+  left:var(--cacpos);
+}
+</style>
+<script>
+/* If you're feeling fancy you can add interactivity 
+    to your site with Javascript */
+
+// prints "hi" in the browser's dev tools console
+console.log('hi');
+
+var st=confirm("Would you like to play a game?");
+var spd=50;
+var dead=false;
+var pos=screen.width;
+var jump=false;
+var sc=0;
+if(st){
+  let root = document.documentElement;
+  
+  root.style.setProperty('--size', screen.width+"px");
+  var hs=screen.width/2;
+  root.style.setProperty('--d', hs+"px");
+    
+  //while(!dead){
+    root.style.setProperty('--jump', 200+"px");
+    function moveCac(){
+      pos-=spd;
+      sc++;
+      root.style.setProperty('--cacpos', pos+"px");
+      if(pos<0){
+        pos=screen.width;
+      }
+      if(!jump&&(pos>(screen.width/2)-150)&&(pos<(screen.width/2)+50)){
+       dead=true;
+    }
+    if(dead){
+    //idk think of something
+    alert("You died with a score of "+sc);
+      sc=0;
+    pos=screen.wdth;
+  
+    var rst=confirm("Restart?");
+      if(rst){
+        dead=false;
+        pos=screen.width;
+      }else{
+        alert("Good game!");
+      }
+  }
+      
+    }
+    setInterval(moveCac, 100);
+
+    document.body.onkeyup = function(e){//jump function, currently not working
+        if(e.keyCode == 32){
+          jump=true;
+          root.style.setProperty('--jump', 300+"px");
+          setTimeout(fall,500);
+          function fall(){
+            root.style.setProperty('--jump', 200+"px");
+            jump=false;
+          }
+        }
+    }
+  
+  //}
+}else{
+  alert("Lol too bad, no game for you :P");
+}
+</script>
+  </body>
+</html>
